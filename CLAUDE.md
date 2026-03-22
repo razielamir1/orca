@@ -54,5 +54,20 @@ When running audit agents (qa-expert, code-reviewer, security-analyst, performan
 ### Documentation Sprint
 `tech-writer` (reads codebase) → produces docs
 
+## Context Efficiency
+Subagents run in isolated contexts — their heavy processing stays in their own session and only a clean summary returns to the main conversation. This prevents context bloat and keeps costs down.
+- Prefer delegating to agents over doing work inline.
+- Use `/full-audit` instead of asking each audit agent individually — it routes reports to files, not the chat.
+- For large codebases, target specific directories (e.g., "audit src/api/") rather than scanning everything.
+
 ## Agent Memory
 Each subagent maintains persistent memory in `.claude/agent-memory/<agent-name>/MEMORY.md`. When reviewing an agent's output, check its memory for context on past decisions.
+
+## Slash Commands
+| Command | What It Does |
+|---|---|
+| `/full-audit` | Runs 4 audit agents in parallel → architect summarizes to FIXES.md |
+| `/new-feature <description>` | Full pipeline: architect → db → backend → frontend → ui → qa |
+| `/fix-bug <description>` | Diagnostic pipeline: qa → fix → qa verify |
+| `/security-check` | Focused security scan with report |
+| `/document <type>` | Generates docs (api / readme / onboarding / jsdoc) |

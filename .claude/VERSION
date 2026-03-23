@@ -1,6 +1,13 @@
-1.0.0
+1.1.0
 
 ## Changelog
+
+### 1.1.0 (2026-03-23)
+- Interactive clarification: prompt-architect asks guiding questions before refining
+- Interactive discovery: business-analyst presents options at key decision points
+- Interactive product definition: product-manager works through scope, priority, UX, and trade-offs with the user
+- Interactive architecture: architect presents approach options with trade-offs before designing
+- /check-updates command and auto-update notifications
 
 ### 1.0.0 (2026-03-23)
 - 15 specialized agents (prompt-architect, business-analyst, product-manager, architect, frontend-developer, ui-designer, backend-developer, database-expert, devops-engineer, code-reviewer, security-analyst, performance-optimizer, qa-expert, tech-writer, git-manager)

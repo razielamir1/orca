@@ -77,6 +77,7 @@ Then type `/init-project` in Claude chat.
 | `/fix-bug <description>` | Diagnostic pipeline: qa → fix → qa verify |
 | `/security-check` | Focused security scan with report |
 | `/document <type>` | Generates docs (api / readme / onboarding / jsdoc) |
+| `/check-updates` | Checks for agent updates and offers to install them |
 
 ## How to Use
 

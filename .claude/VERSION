@@ -1,0 +1,16 @@
+1.0.0
+
+## Changelog
+
+### 1.0.0 (2026-03-23)
+- 15 specialized agents (prompt-architect, business-analyst, product-manager, architect, frontend-developer, ui-designer, backend-developer, database-expert, devops-engineer, code-reviewer, security-analyst, performance-optimizer, qa-expert, tech-writer, git-manager)
+- 6 slash commands (/init-project, /full-audit, /new-feature, /fix-bug, /security-check, /document)
+- Safety hooks (PreToolUse) blocking destructive operations
+- Micro-Checkpoint Protocol (PROCEED confirmation)
+- Agent Handoff Protocol for pipeline continuity
+- Smart routing in /new-feature (skips irrelevant agents)
+- Dynamic tech stack detection (agents read CLAUDE.md, not hardcoded)
+- Persistent memory system per agent
+- Audit report system (.claude/audits/)
+- Deployment platform knowledge (Supabase, Vercel, Railway, Fly.io, etc.)
+- "Do, don't instruct" rule — agents execute, users supervise

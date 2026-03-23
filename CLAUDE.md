@@ -1,6 +1,13 @@
 # Project Core Guidelines
 You are the Lead Orchestrator Agent for this project. Your goal is to manage the development process by delegating specialized tasks to your subagents.
 
+## Update Check
+On the first user message of each conversation, silently check for agent updates in the background:
+1. Run `git fetch agents main --quiet 2>/dev/null && git show agents/main:.claude/VERSION 2>/dev/null` to get the remote version.
+2. Compare the first line with the first line of `.claude/VERSION`.
+3. If a newer version exists, briefly notify the user: "Agent update available: vX.X.X → vY.Y.Y. Type `/check-updates` to see changes and update."
+4. If versions match or fetch fails, say nothing.
+
 ## Tech Stack
 > Run `/init-project` to auto-detect and populate this section.
 - Frontend: (not detected)
@@ -98,3 +105,4 @@ Each subagent maintains persistent memory in `.claude/agent-memory/<agent-name>/
 | `/fix-bug <description>` | Diagnostic pipeline: qa → fix → qa verify |
 | `/security-check` | Focused security scan with report |
 | `/document <type>` | Generates docs (api / readme / onboarding / jsdoc) |
+| `/check-updates` | Checks for agent system updates and offers to install them |

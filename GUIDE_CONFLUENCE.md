@@ -567,6 +567,43 @@ Delete its file from `.claude/agents/` and optionally remove its memory director
 | Audit reports not generated | Verify audit agents have `Write` in their `tools` field |
 | CLAUDE.md shows "(not detected)" | Run `/init-project` to auto-detect your tech stack |
 
+### Git Subtree Installation Errors
+
+**`fatal: not a git repository`**
+
+The project is not initialized as a Git repo. Run first:
+```bash
+git init && git add -A && git commit -m "Initial commit"
+```
+
+**`fatal: prefix '.claude' already exists`**
+
+The project already has a `.claude` directory (from Claude Code or a previous install). Remove it first:
+```bash
+rm -rf .claude
+git add -A && git commit -m "Remove old .claude directory"
+git subtree add --prefix=.claude agents main --squash
+```
+
+**`fatal: working tree has modifications. Cannot add.`**
+
+You have uncommitted changes. Commit them first:
+```bash
+git add -A && git commit -m "Save current state"
+```
+Then retry the subtree command.
+
+**Full recovery sequence (run all in order):**
+```bash
+git add -A && git commit -m "Save current state"
+rm -rf .claude
+git add -A && git commit -m "Remove old .claude directory"
+git remote add agents https://github.com/razielamir1/LeadOrchestratorAgent.git
+git fetch agents
+git subtree add --prefix=.claude agents main --squash
+# Then type /init-project in Claude chat
+```
+
 ---
 
 *Last updated: March 2026*

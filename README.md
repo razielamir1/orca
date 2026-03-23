@@ -261,3 +261,46 @@ your-project/
 - **Restrict permissions:** Remove `Write` and `Edit` from the `tools` field to make an agent read-only
 - **Add MCP servers:** Edit `.claude/settings.json` — see [MCP_SETUP.md](MCP_SETUP.md) for examples
 - **Add slash commands:** Create a new `.md` file in `.claude/commands/`
+
+## Troubleshooting
+
+### `fatal: not a git repository`
+The project is not initialized as a Git repo. Run first:
+```bash
+git init && git add -A && git commit -m "Initial commit"
+```
+
+### `fatal: prefix '.claude' already exists`
+The project already has a `.claude` directory (from Claude Code or a previous install). Remove it first:
+```bash
+rm -rf .claude
+git add -A && git commit -m "Remove old .claude directory"
+git subtree add --prefix=.claude agents main --squash
+```
+
+### `fatal: working tree has modifications. Cannot add.`
+You have uncommitted changes. Commit them first:
+```bash
+git add -A && git commit -m "Save current state"
+```
+Then retry the subtree command.
+
+### Full installation sequence for existing projects with issues
+If you hit multiple errors, run these commands in order:
+```bash
+# 1. Save any uncommitted work
+git add -A && git commit -m "Save current state"
+
+# 2. Remove existing .claude directory if present
+rm -rf .claude
+git add -A && git commit -m "Remove old .claude directory"
+
+# 3. Add the agents remote (skip if already added)
+git remote add agents https://github.com/razielamir1/LeadOrchestratorAgent.git
+git fetch agents
+
+# 4. Pull agents into the project
+git subtree add --prefix=.claude agents main --squash
+
+# 5. Open in VSCode and type /init-project to auto-detect your stack
+```

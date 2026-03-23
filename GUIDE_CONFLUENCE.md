@@ -26,7 +26,7 @@
 
 ## 1. What Is This?
 
-A system of **14 specialized AI agents** that work together as a complete development team inside Claude Code. Instead of one AI doing everything, tasks are routed to the right specialist — just like a real team.
+A system of **15 specialized AI agents** that work together as a complete development team inside Claude Code. Instead of one AI doing everything, tasks are routed to the right specialist — just like a real team.
 
 **Key benefits:**
 - Each agent has deep expertise in its domain
@@ -262,7 +262,7 @@ Run @qa-expert in the background to scan the entire project for bugs
 
 **How:** Type `/agents` in the chat.
 
-**What you see:** An interactive menu listing all 14 agents with their descriptions. You can select one to invoke it.
+**What you see:** An interactive menu listing all 15 agents with their descriptions. You can select one to invoke it.
 
 ---
 
@@ -416,6 +416,7 @@ Audit reports are excluded from version control via `.gitignore`. They are tempo
 | `devops-engineer` | Docker, CI/CD, deployment | Infrastructure, pipelines, configs |
 | `performance-optimizer` | Profiling, caching, optimization | Speed improvements, bundle size |
 | `tech-writer` | Documentation, JSDoc | API docs, README, guides |
+| `git-manager` | Git workflow, branching, releases | PRs, tags, merge conflicts, repo hygiene |
 
 ### Agents That ADVISE Only
 
@@ -458,6 +459,7 @@ Each agent has a memory file at `.claude/agent-memory/<agent-name>/MEMORY.md`.
 | `performance-optimizer` | Benchmarks, optimization history, bottlenecks |
 | `qa-expert` | Bug patterns, fragile areas, test strategies |
 | `tech-writer` | Documentation style, terminology, gaps |
+| `git-manager` | Branching conventions, release history, commit style |
 
 ### Manually Triggering Memory Save
 

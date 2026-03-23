@@ -1,7 +1,10 @@
 {
   "permissions": {
     "allow": [],
-    "deny": []
+    "deny": [],
+    "additionalDirectories": [
+      "/Users/razielamir/LeadOrchestratorAgent/.claude/agent-memory"
+    ]
   },
   "hooks": {
     "PreToolUse": [

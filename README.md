@@ -1,6 +1,6 @@
 # Lead Orchestrator Agent
 
-A multi-agent system for Claude Code featuring 14 specialized AI agents that work together as a complete development team. Each agent has its own role, tools, permissions, and persistent memory.
+A multi-agent system for Claude Code featuring 15 specialized AI agents that work together as a complete development team. Each agent has its own role, tools, permissions, and persistent memory.
 
 ## Agents
 
@@ -21,6 +21,7 @@ A multi-agent system for Claude Code featuring 14 specialized AI agents that wor
 | `performance-optimizer` | Profiling, optimization, caching | sonnet | Read + Write |
 | `qa-expert` | Testing, bug hunting, coverage | sonnet | Read-only (reports) |
 | `tech-writer` | API docs, README, JSDoc, guides | sonnet | Read + Write |
+| `git-manager` | Branching, PRs, releases, merge conflicts | sonnet | Read + Write |
 
 **Read-only agents** (architect, code-reviewer, security-analyst, qa-expert) advise and report — they never modify your source code. They can only write to audit reports and their own memory files.
 
@@ -225,7 +226,8 @@ your-project/
     │   ├── qa-expert.md
     │   ├── security-analyst.md
     │   ├── tech-writer.md
-    │   └── ui-designer.md
+    │   ├── ui-designer.md
+    │   └── git-manager.md
     ├── commands/                           # Slash commands
     │   ├── init-project.md                # /init-project
     │   ├── full-audit.md                  # /full-audit
@@ -249,7 +251,8 @@ your-project/
         ├── qa-expert/MEMORY.md
         ├── security-analyst/MEMORY.md
         ├── tech-writer/MEMORY.md
-        └── ui-designer/MEMORY.md
+        ├── ui-designer/MEMORY.md
+        └── git-manager/MEMORY.md
 ```
 
 ## Customization

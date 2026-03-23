@@ -1,6 +1,11 @@
-1.2.0
+1.3.0
 
 ## Changelog
+
+### 1.3.0 (2026-03-23)
+- Cross-Agent Issue Resolution: agents flag problems outside their domain, orchestrator auto-routes to the right agent, fixes happen automatically
+- Resolution chains: if fixing agent finds another issue, it chains to the next agent (max depth 3)
+- User informed after the fact, not asked to intervene
 
 ### 1.2.0 (2026-03-23)
 - "Speak plainly" rule added to CLAUDE.md — all agents use simple everyday language with users

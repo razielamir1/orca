@@ -64,6 +64,35 @@ When an agent completes its task and the next agent in the pipeline needs to con
 - [Anything unresolved that the next agent or user should address]
 ```
 
+## Cross-Agent Issue Resolution
+When an agent discovers a problem outside its domain during its work, it must NOT ignore it, stop, or ask the user to handle it. Instead:
+
+1. The agent flags the issue using this format:
+```
+@ISSUE → [target-agent-name]
+**Found by:** [current-agent-name]
+**Problem:** [plain description of the issue]
+**File(s):** [affected files, if known]
+**Blocking:** [yes/no — is this blocking the current agent's work?]
+```
+
+2. **The Lead Orchestrator must then:**
+   - Immediately route the issue to the target agent
+   - The target agent fixes the problem
+   - If the fix was blocking, the original agent resumes its work with the fix applied
+   - If non-blocking, the original agent continues and the fix happens in parallel
+
+3. **Examples of cross-agent issues:**
+   - `backend-developer` finds a missing database column → flags `@ISSUE → database-expert`
+   - `frontend-developer` finds a broken API endpoint → flags `@ISSUE → backend-developer`
+   - `qa-expert` finds a security vulnerability → flags `@ISSUE → security-analyst`
+   - `ui-designer` finds a component has no data → flags `@ISSUE → frontend-developer`
+   - Any agent finds a wrong import or broken dependency → flags `@ISSUE → devops-engineer`
+
+4. **Resolution chain:** If the fixing agent discovers yet another issue in a different domain, it flags it the same way. The orchestrator keeps routing until all issues are resolved. Maximum chain depth: 3 (to prevent infinite loops). If depth 3 is reached, pause and report to the user.
+
+The user is informed of cross-agent resolutions after the fact: "During development, the backend agent found a missing database column. The database agent added it and the backend agent continued automatically."
+
 This ensures no context is lost between agents and each agent can pick up exactly where the previous one left off.
 
 ## Audit Reports

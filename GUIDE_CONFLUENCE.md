@@ -14,13 +14,16 @@
 6. [Working With Agents — Step by Step](#6-working-with-agents--step-by-step)
 7. [Advanced Workflows](#7-advanced-workflows)
 8. [Safety System](#8-safety-system)
-9. [Audit Report System](#9-audit-report-system)
-10. [Agent Reference Card](#10-agent-reference-card)
-11. [Memory System](#11-memory-system)
-12. [MCP — External Tool Integration](#12-mcp--external-tool-integration)
-13. [Context Efficiency](#13-context-efficiency)
-14. [Customizing for Your Project](#14-customizing-for-your-project)
-15. [Troubleshooting](#15-troubleshooting)
+9. [Agent Collaboration](#9-agent-collaboration)
+10. [Accessibility Menu](#10-accessibility-menu-automatic)
+11. [Deployment Platform Support](#11-deployment-platform-support)
+12. [Audit Report System](#12-audit-report-system)
+13. [Agent Reference Card](#13-agent-reference-card)
+14. [Memory System](#14-memory-system)
+15. [MCP — External Tool Integration](#15-mcp--external-tool-integration)
+16. [Context Efficiency](#16-context-efficiency)
+17. [Customizing for Your Project](#17-customizing-for-your-project)
+18. [Troubleshooting](#18-troubleshooting)
 
 ---
 
@@ -138,6 +141,7 @@ Slash commands are pre-built workflows that automate common multi-agent tasks.
 | `/security-check` | Focused security vulnerability scan | security-analyst |
 | `/document <type>` | Generates documentation (api/readme/onboarding/jsdoc) | tech-writer |
 | `/check-updates` | Checks for agent system updates and offers to install | Lead Orchestrator |
+| `/update-agents` | Pulls and installs the latest agent version | Lead Orchestrator |
 
 ### How to use them
 
@@ -373,9 +377,74 @@ A `PreToolUse` hook in `.claude/settings.json` blocks dangerous operations at th
 
 When an agent tries a blocked operation, it receives an error message and cannot proceed. This provides a safety net beyond the prompt-level checkpoints.
 
+### 8.3 — Communication Rules
+
+- **Do, don't instruct:** Agents execute commands themselves — they never tell the user to run terminal commands manually. The user is a supervisor, not an operator.
+- **Speak plainly:** Agents use simple everyday language with users. Instead of "monolith vs. microservices", they say "one single app vs. separate services that talk to each other." Technical jargon is reserved for code and agent-to-agent communication.
+
 ---
 
-## 9. Audit Report System
+## 9. Agent Collaboration
+
+### 9.1 — Handoff Protocol
+
+When agents pass work to the next agent in a pipeline, they provide a structured summary:
+- **What was done:** Files created/modified
+- **Key decisions made:** Important choices and rationale
+- **What the next agent needs to know:** Context and dependencies
+- **Open questions:** Anything unresolved
+
+### 9.2 — Cross-Agent Issue Resolution
+
+When an agent discovers a problem outside its domain, it flags it automatically using `@ISSUE → [target-agent]`. The orchestrator routes the issue, the target agent fixes it, and the original agent continues — all without user intervention.
+
+**Examples:**
+- `backend-developer` finds a missing database column → auto-routes to `database-expert`
+- `frontend-developer` finds a broken API endpoint → auto-routes to `backend-developer`
+- `qa-expert` finds a security vulnerability → auto-routes to `security-analyst`
+- `ui-designer` finds a component has no data → auto-routes to `frontend-developer`
+
+Resolution chains up to 3 levels deep are supported (agent A → agent B → agent C). The user is informed after the fact.
+
+---
+
+## 10. Accessibility Menu (Automatic)
+
+Every web project automatically gets a floating accessibility menu (♿ icon, bottom-left corner). The `ui-designer` creates it during development. The `qa-expert` flags it as a high-severity finding if missing during audits.
+
+### Features
+| Feature | What It Does |
+|---|---|
+| Font Size | Increase / decrease / reset text size |
+| High Contrast | Dark background, bright text |
+| Grayscale | For color-blind users |
+| Link Highlighting | Underline and highlight all links |
+| Readable Font | Dyslexia-friendly font |
+| Stop Animations | Pause all CSS animations |
+| Big Cursor | Enlarge the mouse cursor |
+| Reading Guide | Horizontal line following the cursor |
+| Reset | Restore all defaults |
+
+Settings persist in the browser via localStorage.
+
+---
+
+## 11. Deployment Platform Support
+
+Agents have built-in knowledge of modern deployment platforms:
+
+| Category | Platforms |
+|---|---|
+| Frontend Hosting | Vercel, Netlify, Cloudflare Pages, GitHub Pages |
+| Backend Hosting | Railway, Fly.io, Render, AWS, Google Cloud Run |
+| Database / BaaS | Supabase, Neon, PlanetScale, Firebase, MongoDB Atlas |
+| CI/CD | GitHub Actions, GitLab CI, CircleCI |
+
+The `devops-engineer` includes a full production deployment checklist. The `architect` recommends hosting platforms as part of architecture design. `/init-project` auto-detects which platforms the project uses.
+
+---
+
+## 12. Audit Report System
 
 ### How It Works
 
@@ -401,7 +470,7 @@ Audit reports are excluded from version control via `.gitignore`. They are tempo
 
 ---
 
-## 10. Agent Reference Card
+## 13. Agent Reference Card
 
 ### Agents That WRITE Code
 
@@ -430,7 +499,7 @@ Audit reports are excluded from version control via `.gitignore`. They are tempo
 
 ---
 
-## 11. Memory System
+## 14. Memory System
 
 ### How It Works
 
@@ -471,7 +540,7 @@ If an agent didn't automatically save its findings:
 
 ---
 
-## 12. MCP — External Tool Integration
+## 15. MCP — External Tool Integration
 
 MCP (Model Context Protocol) lets your agents access external systems. All MCP servers are configured in `.claude/settings.json`.
 
@@ -488,7 +557,7 @@ See [MCP_SETUP.md](MCP_SETUP.md) for step-by-step setup instructions with config
 
 ---
 
-## 13. Context Efficiency
+## 16. Context Efficiency
 
 Subagents run in isolated contexts — their heavy processing stays in their own session and only a clean summary returns to the main conversation. This prevents context bloat and keeps costs down.
 
@@ -499,7 +568,7 @@ Subagents run in isolated contexts — their heavy processing stays in their own
 
 ---
 
-## 14. Customizing for Your Project
+## 17. Customizing for Your Project
 
 ### Step 14.1 — Auto-Detect Tech Stack
 
@@ -554,7 +623,7 @@ Delete its file from `.claude/agents/` and optionally remove its memory director
 
 ---
 
-## 15. Troubleshooting
+## 18. Troubleshooting
 
 | Problem | Solution |
 |---|---|

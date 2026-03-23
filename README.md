@@ -152,6 +152,45 @@ A `PreToolUse` hook in `settings.json` blocks dangerous operations at the system
 
 The agent receives an error and cannot proceed — this is technical enforcement, not just a prompt instruction.
 
+### Communication Rules
+- **Do, don't instruct:** Agents execute commands themselves — they never tell the user to run terminal commands manually. The user is a supervisor, not an operator.
+- **Speak plainly:** Agents use simple everyday language with users. Technical jargon is reserved for code and agent-to-agent communication.
+
+## Agent Collaboration
+
+### Handoff Protocol
+When agents pass work to the next agent in a pipeline, they provide a structured summary: what was done, key decisions, what the next agent needs to know, and open questions.
+
+### Cross-Agent Issue Resolution
+When an agent discovers a problem outside its domain, it flags it automatically:
+- `backend-developer` finds a missing database column → auto-routes to `database-expert`
+- `frontend-developer` finds a broken API endpoint → auto-routes to `backend-developer`
+- `qa-expert` finds a security issue → auto-routes to `security-analyst`
+
+The orchestrator routes the issue, the target agent fixes it, and the original agent continues — all without user intervention. Resolution chains up to 3 levels deep are supported.
+
+## Accessibility Menu (Automatic)
+
+Every web project automatically gets a floating accessibility menu (♿) with:
+- Font size controls, high contrast mode, grayscale mode
+- Link highlighting, dyslexia-friendly font, stop animations
+- Big cursor, reading guide, reset all settings
+
+The `ui-designer` creates it during development. The `qa-expert` flags it as a high-severity finding if missing during audits. Settings persist in the browser via localStorage.
+
+## Deployment Platform Support
+
+Agents have built-in knowledge of modern deployment platforms:
+
+| Category | Platforms |
+|---|---|
+| Frontend Hosting | Vercel, Netlify, Cloudflare Pages, GitHub Pages |
+| Backend Hosting | Railway, Fly.io, Render, AWS, Google Cloud Run |
+| Database / BaaS | Supabase, Neon, PlanetScale, Firebase, MongoDB Atlas |
+| CI/CD | GitHub Actions, GitLab CI, CircleCI |
+
+The `devops-engineer` includes a full production deployment checklist. The `architect` recommends hosting platforms as part of architecture design. `/init-project` auto-detects which platforms the project uses.
+
 ## Audit Report System
 
 Audit agents write their findings to `.claude/audits/` instead of flooding the main conversation:
@@ -214,7 +253,8 @@ your-project/
 ├── .gitignore                             # Excludes audit reports from git
 └── .claude/
     ├── settings.json                      # Safety hooks + MCP server config
-    ├── agents/                            # Agent definitions (11 agents)
+    ├── VERSION                            # Version tracking + changelog
+    ├── agents/                            # Agent definitions (15 agents)
     │   ├── prompt-architect.md
     │   ├── business-analyst.md
     │   ├── product-manager.md
@@ -236,7 +276,9 @@ your-project/
     │   ├── new-feature.md                 # /new-feature
     │   ├── fix-bug.md                     # /fix-bug
     │   ├── security-check.md             # /security-check
-    │   └── document.md                    # /document
+    │   ├── document.md                    # /document
+    │   ├── check-updates.md              # /check-updates
+    │   └── update-agents.md              # /update-agents
     ├── audits/                            # Audit reports (git-ignored)
     │   └── .gitkeep
     └── agent-memory/                      # Persistent memory (per-project)

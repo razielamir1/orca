@@ -2,6 +2,10 @@
 
 ## Changelog
 
+### 1.5.0 (2026-03-23)
+- Full documentation sync: README and Confluence guide updated with all features
+- Added: cross-agent issue resolution, handoff protocol, accessibility menu, deployment platforms, communication rules, /update-agents
+
 ### 1.4.2 (2026-03-23)
 - /update-agents command: one-command agent update with auto-recovery on failures
 

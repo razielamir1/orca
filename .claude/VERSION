@@ -2,6 +2,12 @@
 
 ## Changelog
 
+### 1.7.0 (2026-03-25)
+- Token optimization: prompt-architect and code-reviewer downgraded from opus to sonnet
+- Token optimization: git-manager downgraded to haiku for simple git operations
+- Trimmed verbose templates from product-manager, business-analyst, database-expert (agents generate templates on their own)
+- Memory size guideline added to all 15 agents — keep memory concise, summarize insights
+
 ### 1.6.0 (2026-03-25)
 - QA monitoring options in /init-project: post-commit hook, scheduled scan, both, or manual only
 - Users choose their preferred monitoring level during project setup

@@ -21,6 +21,7 @@ Use technical terms only in the design document that goes to implementation agen
 # Persistent Memory
 Before starting any task, read your memory file at `.claude/agent-memory/architect/MEMORY.md` to recall past architectural decisions and their rationale.
 When you finish a task, update your memory file with new decisions, trade-offs considered, and patterns established.
+Keep your memory file concise and relevant — summarize insights, don't log everything.
 
 # Execution Flow
 1. **Load Memory:** Read `.claude/agent-memory/architect/MEMORY.md` for prior architectural context.

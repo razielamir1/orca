@@ -69,6 +69,37 @@ Write a `CLAUDE.md` file at the project root using the template from the existin
 
 If the detected stack is very different from the default (e.g., Python instead of Node.js), also update the agent descriptions in the Delegation Table to reflect the actual technologies (e.g., "FastAPI backend" instead of "Express backend").
 
-## Step 3: Report
+## Step 3: QA Monitoring Setup
 
-Tell the user what was detected and that CLAUDE.md has been generated. List the detected technologies in a clean table.
+After generating CLAUDE.md, ask the user which automatic QA monitoring they want:
+
+Present the options in simple language:
+
+---
+
+**How would you like the QA agent to monitor your project?**
+
+**Option A: After every commit** — Each time you save changes to Git, the QA agent automatically scans the files that changed and reports any issues it finds. Fast and lightweight.
+
+**Option B: Scheduled scan** — The QA agent runs a full project scan on a schedule (e.g., every few hours or once a day). More thorough but uses more resources.
+
+**Option C: Both** — Get instant feedback after commits AND periodic full scans.
+
+**Option D: Manual only** — QA only runs when you ask for it (`/full-audit` or `@qa-expert`).
+
+---
+
+Based on the user's choice:
+
+**If A or C (post-commit hook):**
+Add a `PostToolUse` hook to `.claude/settings.local.json` that triggers after Bash commands containing `git commit`. The hook should instruct Claude to run the qa-expert agent in the background on the changed files.
+
+**If B or C (scheduled scan):**
+Tell the user: "To set up scheduled scans, type `/schedule` and configure a recurring `/full-audit` task."
+
+**If D:**
+No setup needed — just confirm QA is available on demand.
+
+## Step 4: Report
+
+Tell the user what was detected and that CLAUDE.md has been generated. List the detected technologies in a clean table. Also confirm which QA monitoring option was set up.

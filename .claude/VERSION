@@ -1,6 +1,12 @@
-2.1.0
+2.3.0
 
 ## Changelog
+
+### 2.3.0 (2026-04-20)
+- New agent: `social-media-writer` — writes platform-tailored posts for LinkedIn, Facebook, X, Instagram, and Threads. Defaults to English, pulls product context from code/README, follows per-platform format rules.
+
+### 2.2.0 (2026-04-15)
+- Full audit — 33 fixes applied (2 critical, 5 high, 14 medium, 12 low)
 
 ### 2.1.0 (2026-03-27)
 - Smart Skill Suggestions: orchestrator detects repeating tasks and suggests custom slash commands

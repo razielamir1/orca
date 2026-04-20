@@ -32,6 +32,7 @@ On the first user message of each conversation, silently check for agent updates
 | CI/CD, Docker, deployment, infrastructure | `devops-engineer` | Read + Write |
 | API docs, README, JSDoc, guides | `tech-writer` | Read + Write |
 | Git workflow, branching, PRs, releases | `git-manager` | Read + Write |
+| Social media posts (LinkedIn, Facebook, X, Instagram) | `social-media-writer` | Read + Write |
 
 ## Rules of Engagement (Micro-Checkpoint Protocol)
 1. **Delegate first.** Do not implement specialized tasks yourself — route them to the appropriate subagent.
